@@ -8,13 +8,45 @@ let finalTestMoves = [];
 let dir = []; 
 let dirL = [];
 let dirR = [];
-let centerPiece = size*size/2 - size/2;
+let centerPiece = 0;
 let centerPieceIndexes = [];
 let nodes = []; //array to point to specific DOM. Key in index to change program
 let gamestate = []; //array to show current state of pieces on board
-let allspots = [505,506,605,606]; //array to show spots occupied
 const pCold = Player('C');
 const pHot = Player('H');
+//Modal
+const formModal = document.getElementById("form"); //modal form
+const modal = document.getElementById("myModal"); //modal window
+const newGame = document.getElementById("newGame"); //newgame button
+const submitBtn = document.getElementById("submit"); //submit button
+newGame.onclick = function() {
+  modal.style.display = "block";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+} 
+submitBtn.onclick = () => {
+    let newsize = 0;
+    let checked = false;
+    let ele = document.getElementsByName('gridsize');       
+    for(i = 0; i < ele.length; i++) {
+        if(ele[i].checked)
+            newsize = parseInt(ele[i].value);
+            checked = true;
+    }
+    if(checked == true){
+        console.log('gridsize: '+newsize);
+        rockEnable = document.getElementById('rockEnable').checked;
+        console.log('rockEnable: '+rockEnable);
+        rocks = document.getElementById('rockNo').value;
+        console.log('rockNo: '+rocks);
+        newGameCreate(newsize, rockEnable, rocks);
+        formModal.reset();
+        modal.style.display = "none";
+    }
+}
 //END of starting variables
 
 const initialize = (() => {
@@ -44,6 +76,7 @@ const initialize = (() => {
         gamestate.push('0');
     }
     for(index of centerPieceIndexes){
+        console.log(index);
         if(index == centerPiece - 1 || index == centerPiece + size){
             nodes[index].textContent = '🥶';
             gamestate[index] = 'C';
@@ -92,8 +125,6 @@ const gameFlow = (() => {
         let transformed = [];
         let transformedGameState = [];
         let marked = e.target.id;
-        console.log(marked);
-        allspots.push(marked);
         if(turn == 1){
             icon = 'H';
             match = 'C';
@@ -145,8 +176,6 @@ const gameFlow = (() => {
             } 
         })
         //End of loops, transform
-        //console.log(transformed);
-        //console.log(transformedGameState);
         transformed.forEach((element) => {
             element.textContent = turn == 1 ? '🥶' : '🥵';
         })
@@ -200,19 +229,16 @@ const rockMaker = () => {
                 tempRockIndexes.push(i);
             }
         }
-        console.log(tempRockIndexes);
         for(i=0; i<=rocks-1; i++){
             let temp = Math.floor(Math.random() * (tempRockIndexes.length));
             RockIndexes.push(tempRockIndexes[temp]);
             tempRockIndexes.splice(temp-1, 3);
-            console.log(i+' ! ' + tempRockIndexes.length);
-            console.log(RockIndexes);
+
         }
         let RockNodes = [];
         for(index of RockIndexes){
             RockNodes.push(nodes[index]);
         }
-        console.log(RockNodes);
         for(node of RockNodes){
             node.style.fontSize = `${initialize.fontsize}px`;
             node.textContent = '⛔';
@@ -238,7 +264,6 @@ function Player(type){
         //Erasing previous highlighted spots
         finalTestMoves.forEach((node) => {
             node.classList.remove('legal');
-            console.log('removed '+ node);
         })
         //First step to find legal moves - retrieving nodes
         this.current = a;
@@ -302,7 +327,6 @@ function Player(type){
         finalTestMoves.forEach((node) => {
             node.classList.add('legal');
         })
-        console.log(finalTestMoves);
     };
     const update = (id) => {
         spots.push(parseInt(id));
@@ -314,15 +338,29 @@ function Player(type){
     };
 }
 
+
+
 function reset(){
     document.getElementById('maingrid').innerHTML = '';
     console.log('resetted!');
-    size = 8;
-    rocks = 6;
+    size = size;
+    rocks = rocks;
+    rockEnable=true;
     initialize();
     gameFlow.checkLegalMoves();
-    rockMaker();
+    if(rockEnable == true) rockMaker();
 }
 
+
+
+function newGameCreate(newsize, rockEnable, rockNo){
+    document.getElementById('maingrid').innerHTML = '';
+    console.log('new game!');
+    size = newsize;
+    rocks = rockNo;
+    initialize();
+    gameFlow.checkLegalMoves();
+    if(rockEnable == true) rockMaker();
+}
 
 

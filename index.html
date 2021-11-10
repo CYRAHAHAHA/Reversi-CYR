@@ -9,11 +9,57 @@
     <script src="reversiV2.js" defer></script>
 </head>
 <body>
-    <div id='blue' class='label'>🥶</div>  
     <div id=contentbox>
-        <div id='title'>< - - - R E V E R S I - - - ></div>
-        <div id='maingrid'></div>
-    </div>
-    <div id='red' class='label'>🥵</div>
+        <div id='header'>
+            <button id='newGame' class='headerbtn'>New Game</button>
+            <!-- Modal Window Form-->
+            <div id="myModal" class="modal">
+                <div class='modalcontent'>  
+                    <h1>Select<br>Game Properties!</h1>
+                    <form id="form">
+                        <div class="formcontent">
+                            <div class='formMessage'>Choose Grid Size!</div>
+                                <div class='chooseGrid'> 
+                                    <input type="radio" id="6" name="gridsize" value="6">
+                                    <label for="6">6</label>
+                                    <input type="radio" id="8" name="gridsize" value="8">
+                                    <label for="8">8</label>
+                                    <input type="radio" id="10" name="gridsize" value="10">
+                                    <label for="10">10</label>
+                                    <input type="radio" id="12" name="gridsize" value="12">
+                                    <label for="12">12</label>
+                                    <input type="radio" id="14" name="gridsize" value="14">
+                                    <label for="14">14</label>
+                                </div>
+                                <div class='formMessage'>
+                                    <label style='font-weight: bold' for="rockEnable">Enable Blockages?</label>
+                                    <input type="checkbox" id="rockEnable"/>
+                                </div>
+                                <div class='formMessage'>
+                                    <label for="rockNo" class='formMessage'>Number of Blockages:</label>
+                                    <input 
+                                        class="input" 
+                                        type="number" 
+                                        id="rockNo" 
+                                        placeholder="Not Too Many!"
+                                        min='0'
+                                        value = '0'
+                                    />
+                                </div>
+                            <button id="submit" type="button">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- End Modal Form -->
+            <div id='title'>< - - - R E V E R S I - - - ></div>
+            <button id='reset' onclick='reset()' class='headerbtn'>Reset</button>
+        </div>
+        <div id='horizontal'>
+            <div id='blue' class='label'>🥶</div>  
+            <div id='maingrid'></div>
+            <div id='red' class='label'>🥵</div>
+        </div>
+    </div>  
 </body>
 </html>

@@ -19,7 +19,7 @@ body {
     width: 170px;
     justify-content: center;
     align-items: center;
-    margin-top: 75px;
+    margin: 75px;
     padding: 10px;
 }
 
@@ -31,11 +31,35 @@ body {
     color: rgb(131,190,233);
 }
 
+#header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.headerbtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(3,253,252, 0.2);
+    border: 5px rgb(3,253,252) solid;
+    border-radius: 4px;
+    padding: 8px 32px;
+    width: 220px;
+    margin: 0;
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none;
+    color: gold;
+    cursor: pointer;
+}
+
 #contentbox {
     display: flex;
+    flex: 1;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 #title {
@@ -67,6 +91,7 @@ body {
 
 .grid:hover{
     background-color: rgba(255, 165, 0, 0.2);
+    cursor: no-drop;
 }
 
 .legal{
@@ -87,4 +112,94 @@ body {
 
 .ROCK:hover {
     background-color: rgb(60, 0, 0, 0.5);
+    cursor: no-drop;
+}
+
+#horizontal {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+
+  /* The Modal (background) */
+  h1 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color:white;
+    font-size: 30px;
+    font-weight: 1000;
+    margin-bottom: 20px;
+  }
+  
+
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modalcontent {
+    background-color: rgb(0, 46, 46);
+    margin: 10% auto; /* 15% from the top and centered */
+    padding: 40px 40px;
+    border: 10px solid black;
+    width: 20%; /* Could be more or less, depending on screen size */
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formcontent {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .chooseGrid {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+  }
+
+.formMessage {
+    display: flex;
+    color: gold;
+    font-size: 25px;
+    font-style: italic;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+}
+
+#submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(3,253,252, 0.2);
+    border: 5px rgb(3,253,252) solid;
+    border-radius: 4px;
+    padding: 8px 32px;
+    margin: 0;
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none;
+    color: gold;
+    cursor: pointer;
 }
