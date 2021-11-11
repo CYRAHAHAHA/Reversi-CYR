@@ -233,12 +233,16 @@ const rockMaker = () => {
             let temp = Math.floor(Math.random() * (tempRockIndexes.length));
             RockIndexes.push(tempRockIndexes[temp]);
             tempRockIndexes.splice(temp-1, 3);
-
         }
         let RockNodes = [];
         for(index of RockIndexes){
             RockNodes.push(nodes[index]);
         }
+        console.log(RockNodes);
+        RockNodes = RockNodes.filter((e)=>{
+            return e !== undefined;
+          })
+        console.log(RockNodes);
         for(node of RockNodes){
             node.style.fontSize = `${initialize.fontsize}px`;
             node.textContent = '⛔';
